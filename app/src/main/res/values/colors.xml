@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <!-- menus -->
+    <color name="headerColor">#FF0000</color>
+    <color name="menuColor">#FF0000</color>
+    <color name="menuButtonColor">#FFFFFF</color>
 </resources>
