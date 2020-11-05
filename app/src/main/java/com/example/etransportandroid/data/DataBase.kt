@@ -13,7 +13,7 @@ class DataBase {
     }
 
     fun insert() {
-        Database.connect("jdbc:postgresql:ETransport", driver = "org.h2.Driver", user = "postgres", password = "password")
+        Database.connect("jdbc:postgresql://localhost:5432/ETransport", driver = "org.postgresql.Driver", user = "postgres", password = "password")
 
         transaction {
             addLogger(StdOutSqlLogger)
