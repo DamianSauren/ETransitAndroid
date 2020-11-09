@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "219310545135",
+    "firebase_url": "https://etransport-1ef2d.firebaseio.com",
+    "project_id": "etransport-1ef2d",
+    "storage_bucket": "etransport-1ef2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219310545135:android:15deb65baa2a8fba13a31a",
+        "android_client_info": {
+          "package_name": "com.example.etransportandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219310545135-buf1v49k6m6714poqju4cga7atcodu3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ-o-P0wP7BMS611U2J6iAX643ryH9PkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219310545135-buf1v49k6m6714poqju4cga7atcodu3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
