@@ -11,30 +11,24 @@ import org.jetbrains.exposed.sql.transactions.transaction
 class DataBase {
 
     fun insert() {
-        Database.connect("jdbc:h2:mem:ETransport", driver = "org.h2.Driver", user = "postgres", password = "password")
+        Database.connect("jdbc:postgresql:localhost:5432/ETransport", driver = "org.postgresql.Driver", user = "postgres", password = "password")
 
         transaction {
             addLogger(StdOutSqlLogger)
 
-            SchemaUtils.create(Cities)
-//
-//            //Insert new city
-//            val stPete = City.new {
-//                name = "St. Petersburg"
-//            }
-//
-                val results = City.all()
-            Log.d("Cities:", "result: $results")
+            val result = transaction {
+                USERS.selectAll().toList()
+            }
+
+            Log.d("DataBase", "result is $result")
+
         }
     }
 
-    object Cities: IntIdTable() {
-        val name = varchar("name", 50)
-    }
+    object USERS: Table() {
+        val user_id = integer("USER_ID").autoIncrement()
+        val user_name = varchar("USER_NAME", 50)
 
-    class City(id: EntityID<Int>) : IntEntity(id) {
-        companion object: IntEntityClass<City>(Cities)
-
-        var name by Cities.name
+        override val primaryKey = PrimaryKey(user_id, name = "user_id")
     }
 }
