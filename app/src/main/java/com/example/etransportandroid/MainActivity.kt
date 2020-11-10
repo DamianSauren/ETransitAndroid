@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-//        StrictMode.setThreadPolicy(policy)
-
         if(findViewById<ConstraintLayout>(R.id.container) != null) {
             if(savedInstanceState == null) {
                 supportFragmentManager.beginTransaction()
@@ -27,8 +24,6 @@ class MainActivity : AppCompatActivity() {
         }
         
         setupMenuButtons()
-//        val dataBase = DataBase()
-//        dataBase.insert()
     }
     
     private fun setupMenuButtons(){
