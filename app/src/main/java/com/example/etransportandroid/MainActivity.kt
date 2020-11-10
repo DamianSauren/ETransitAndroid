@@ -1,15 +1,17 @@
 package com.example.etransportandroid
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
 
     private var currentFragment: Fragment = HomeFragment()
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             }
         }
+        mAuth = FirebaseAuth.getInstance()
+
+        Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
         
         setupMenuButtons()
     }

@@ -6,55 +6,180 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+  <ImageView
+      android:id="@+id/logo_imageview"
+      android:layout_width="0dp"
+      android:layout_height="100dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_brand_logo" />
+
+
   <TextView
-      android:id="@+id/textView4"
+      android:id="@+id/proceed_textview"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Register"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:lineSpacingExtra="0sp"
+      android:text="Proceed to"
+      android:textColor="#000000"
+      android:textSize="24sp"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toBottomOf="@+id/logo_imageview" />
+
+  <TextView
+      android:id="@+id/textView6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="Register"
+      android:textColor="#000000"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/proceed_textview" />
+
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="E-mail address"
+      android:textColor="#636363"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
   <EditText
       android:id="@+id/email_register_edittext"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
       android:ems="10"
       android:inputType="textEmailAddress"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/textView4" />
+      app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-  <EditText
-      android:id="@+id/password_register_edittext"
+  <TextView
+      android:id="@+id/textView3"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:ems="10"
-      android:inputType="textPassword"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="Password"
+      android:textColor="#636363"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/email_register_edittext" />
 
+  <EditText
+      android:id="@+id/password_register_edittext"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
+      android:ems="10"
+      android:inputType="textPassword"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
   <Button
       android:id="@+id/register_button"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="REGISTER"
+      android:layout_marginEnd="64dp"
+      android:layout_marginStart="64dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/rounded_corners"
+      android:text="Register"
+      android:textAllCaps="false"
+      android:textColor="#FFFFFF"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/repeat_password_register_edittext" />
+      app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
   <TextView
       android:id="@+id/login_textview"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Or login to an existing account"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="I'm going to be using eTransport as a "
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/register_button" />
+      app:layout_constraintTop_toBottomOf="@+id/repeat_password_register_edittext" />
+
+  <TextView
+      android:id="@+id/textView4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="Repeat Password
+"
+      android:textColor="#636363"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/password_register_edittext" />
 
   <EditText
       android:id="@+id/repeat_password_register_edittext"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
       android:ems="10"
       android:inputType="textPassword"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/password_register_edittext" />
+      app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+  <CheckBox
+      android:id="@+id/checkBox"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="personal user"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/login_textview" />
+
+  <CheckBox
+      android:id="@+id/checkBox2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:text="business user"
+      app:layout_constraintStart_toEndOf="@+id/textView5"
+      app:layout_constraintTop_toBottomOf="@+id/login_textview" />
+
+  <TextView
+      android:id="@+id/textView5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="20dp"
+      android:text="or"
+      app:layout_constraintStart_toEndOf="@+id/checkBox"
+      app:layout_constraintTop_toBottomOf="@+id/login_textview" />
+
+  <TextView
+      android:id="@+id/textView7"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:text="Already got an account? Press here to login"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/register_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
