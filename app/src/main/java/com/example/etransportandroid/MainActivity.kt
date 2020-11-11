@@ -5,13 +5,19 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.etransportandroid.data.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
     private var currentFragment: Fragment = HomeFragment()
     private lateinit var mAuth: FirebaseAuth
+
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +32,25 @@ class MainActivity : AppCompatActivity() {
         }
         mAuth = FirebaseAuth.getInstance()
 
+        // Write a message to the database
+        database = FirebaseDatabase.getInstance()
+        writeNewUser(mAuth.currentUser?.uid.toString(), mAuth.currentUser?.displayName.toString(), mAuth.currentUser?.email.toString())
+
         Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
         
         setupMenuButtons()
+    }
+
+    private fun writeNewUser(userId: String, name: String, email: String) {
+        val user = User(
+            name,
+            "Commercial",
+            User.Orders(
+                commercial = mutableListOf("C_Entry1", "C_Entry2") as ArrayList<String>,
+                private = mutableListOf("") as ArrayList<String>
+            )
+        )
+        database.reference.child("users").child(userId).setValue(user)
     }
     
     private fun setupMenuButtons(){
