@@ -1,19 +1,18 @@
-package com.example.etransportandroid
+package com.example.etransportandroid.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.etransportandroid.R
+import com.example.etransportandroid.StartActivity
+import com.example.etransportandroid.data.Database
 import com.example.etransportandroid.enumClasses.Fragments
 import com.example.etransportandroid.interfaces.FragmentManagement
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_register.view.*
 
 class RegisterFragment(private val fragmentManagement: FragmentManagement): Fragment() {
 
@@ -25,6 +24,7 @@ class RegisterFragment(private val fragmentManagement: FragmentManagement): Frag
     private lateinit var repeatPasswordEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var loginTextView: TextView
+    private lateinit var groupSwitch: Switch
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +38,7 @@ class RegisterFragment(private val fragmentManagement: FragmentManagement): Frag
         repeatPasswordEditText = layout.findViewById(R.id.repeat_password_register_edittext)
         registerButton = layout.findViewById(R.id.register_button)
         loginTextView = layout.findViewById(R.id.login_textview)
+        groupSwitch = layout.findViewById(R.id.group_switch_register)
 
         mAuth = FirebaseAuth.getInstance()
         setupRegisterForm()
@@ -90,6 +91,14 @@ class RegisterFragment(private val fragmentManagement: FragmentManagement): Frag
                     Log.d("LOGIN", "createUserWithEmail:success")
                     val user = mAuth.currentUser
                     (activity as StartActivity).loadMainActivity()
+
+                    if (user != null) {
+                        Database().writeNewUser(
+                            userId = user.uid,
+                            groupId = if(!groupSwitch.isChecked) Database.GroupID.COMMERCIAL else Database.GroupID.PRIVATE
+
+                        )
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("LOGIN", "createUserWithEmail:failure", task.exception)

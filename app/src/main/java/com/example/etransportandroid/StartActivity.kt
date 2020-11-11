@@ -2,12 +2,12 @@ package com.example.etransportandroid
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.etransportandroid.enumClasses.Fragments
+import com.example.etransportandroid.fragments.LoginFragment
+import com.example.etransportandroid.fragments.RegisterFragment
 import com.example.etransportandroid.interfaces.FragmentManagement
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -17,8 +17,10 @@ class StartActivity: AppCompatActivity(), FragmentManagement {
 
     private var currentFragment: Fragment = LoginFragment(this)
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
+        setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance()
 
         //Check if the current user is singed in (non-null) and proceed to MainActivity
@@ -26,12 +28,6 @@ class StartActivity: AppCompatActivity(), FragmentManagement {
         if(currentUser!= null) {
             loadMainActivity()
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        FirebaseApp.initializeApp(this)
-        setContentView(R.layout.activity_login)
 
         if(findViewById<ConstraintLayout>(R.id.container) != null) {
             if(savedInstanceState == null) {
@@ -42,7 +38,7 @@ class StartActivity: AppCompatActivity(), FragmentManagement {
         }
     }
 
-    public fun loadMainActivity() {
+    fun loadMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

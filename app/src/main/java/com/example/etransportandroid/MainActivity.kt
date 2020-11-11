@@ -5,12 +5,16 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.etransportandroid.data.User
+import com.example.etransportandroid.data.Database
+import com.example.etransportandroid.data.Order
+import com.example.etransportandroid.fragments.BookingFragment
+import com.example.etransportandroid.fragments.HomeFragment
+import com.example.etransportandroid.fragments.SettingsFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,23 +38,29 @@ class MainActivity : AppCompatActivity() {
 
         // Write a message to the database
         database = FirebaseDatabase.getInstance()
-        writeNewUser(mAuth.currentUser?.uid.toString(), mAuth.currentUser?.displayName.toString(), mAuth.currentUser?.email.toString())
 
         Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
+
+
+        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), Order(
+            itemDescription = "test",
+            weight = "pittig zwaar",
+            PickUpDate = "",
+            hazards = "",
+            timeFrame = 5,
+            bookingDate = "",
+            dimensions = Order.Dimensions (
+                height = "",
+                length = "",
+                depth = ""
+            ),
+            locations = Order.Locations(
+                to = "",
+                from = ""
+            )
+        ))
         
         setupMenuButtons()
-    }
-
-    private fun writeNewUser(userId: String, name: String, email: String) {
-        val user = User(
-            name,
-            "Commercial",
-            User.Orders(
-                commercial = mutableListOf("C_Entry1", "C_Entry2") as ArrayList<String>,
-                private = mutableListOf("") as ArrayList<String>
-            )
-        )
-        database.reference.child("users").child(userId).setValue(user)
     }
     
     private fun setupMenuButtons(){

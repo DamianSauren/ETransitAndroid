@@ -1,4 +1,4 @@
-package com.example.etransportandroid
+package com.example.etransportandroid.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +10,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.etransportandroid.R
+import com.example.etransportandroid.StartActivity
 import com.example.etransportandroid.enumClasses.Fragments
 import com.example.etransportandroid.interfaces.FragmentManagement
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment(private val fragmentManagement: FragmentManagement): Fragment() {
 
