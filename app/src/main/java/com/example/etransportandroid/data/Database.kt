@@ -1,6 +1,5 @@
 package com.example.etransportandroid.data
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -10,6 +9,9 @@ import com.google.firebase.database.ValueEventListener
 class Database {
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+    private val commercial: String = "Commercial"
+    private val private: String = "Private"
 
     enum class GroupID {
         COMMERCIAL,
@@ -36,7 +38,33 @@ class Database {
         database.reference.child("users").child(userId).setValue(user)
     }
 
-    fun writeNewOrder(userId: String, order: Order) {
+    fun getUserGroupID(userId: String): GroupID {
+        var isDone = false
+        val dbRef = database.reference
+        var group: GroupID = GroupID.PRIVATE
+
+        val postListener = object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!isDone) {
+                    val groupId = snapshot.child("users").child(userId).child("groupID").value.toString()
+
+                    if(groupId == commercial) {
+                        group = GroupID.COMMERCIAL
+                    } else if (groupId == private) {
+                        group = GroupID.PRIVATE
+                    }
+
+                    isDone = true
+                }
+            }
+            override fun onCancelled(error: DatabaseError) { }
+        }
+        dbRef.addValueEventListener(postListener)
+
+        return group
+    }
+
+    fun writeNewOrder(userId: String, order: CommercialOrder) {
         var isDone = false
         val dbRef = database.reference
 
@@ -47,9 +75,9 @@ class Database {
                     val groupId = snapshot.child("users").child(userId).child("groupID").value.toString()
                     
                     var orderId = "error"
-                    if(groupId == "Commercial") {
+                    if(groupId == commercial) {
                         orderId = "C_Entry1"
-                    } else if(groupId == "Private") {
+                    } else if(groupId == private) {
                         orderId = "P_Entry1"
                     }
 
@@ -64,9 +92,9 @@ class Database {
                             number = lastOrderId.removePrefix("P_Entry").toInt()
                         }
 
-                        if(groupId == "Commercial" && number != 0) {
+                        if(groupId == commercial && number != 0) {
                             orderId = "C_Entry${number+1}"
-                        } else if(groupId == "Private" && number != 0) {
+                        } else if(groupId == private && number != 0) {
                             orderId = "P_Entry${number+1}"
                         }
                     }

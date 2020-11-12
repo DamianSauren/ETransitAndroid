@@ -6,15 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.etransportandroid.data.Database
-import com.example.etransportandroid.data.Order
-import com.example.etransportandroid.fragments.BookingFragment
+import com.example.etransportandroid.data.CommercialOrder
+import com.example.etransportandroid.fragments.CommercialBookingFragment
 import com.example.etransportandroid.fragments.HomeFragment
+import com.example.etransportandroid.fragments.PrivateBookingFragment
 import com.example.etransportandroid.fragments.SettingsFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,19 +41,19 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
 
 
-        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), Order(
+        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), CommercialOrder(
             itemDescription = "test",
             weight = "pittig zwaar",
             PickUpDate = "",
             hazards = "",
             timeFrame = 5,
             bookingDate = "",
-            dimensions = Order.Dimensions (
+            dimensions = CommercialOrder.Dimensions (
                 height = "",
                 length = "",
                 depth = ""
             ),
-            locations = Order.Locations(
+            locations = CommercialOrder.Locations(
                 to = "",
                 from = ""
             )
@@ -65,8 +64,12 @@ class MainActivity : AppCompatActivity() {
     
     private fun setupMenuButtons(){
         booking_button.setOnClickListener {
-            if(currentFragment != BookingFragment()) {
-                addFragmentToActivity(BookingFragment())
+            if(currentFragment != CommercialBookingFragment()) {
+
+                when(Database().getUserGroupID(mAuth.currentUser?.uid.toString())) {
+                    Database.GroupID.COMMERCIAL -> addFragmentToActivity(CommercialBookingFragment())
+                    Database.GroupID.PRIVATE -> addFragmentToActivity(PrivateBookingFragment())
+                }
             }
         }
 

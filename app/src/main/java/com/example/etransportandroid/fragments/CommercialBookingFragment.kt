@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.etransportandroid.R
 
-class BookingFragment: Fragment() {
+class CommercialBookingFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val inflate = inflater.inflate(R.layout.fragment_booking, container, false)
+        val inflate = inflater.inflate(R.layout.fragment_commercial_booking, container, false)
 
         return inflate
     }

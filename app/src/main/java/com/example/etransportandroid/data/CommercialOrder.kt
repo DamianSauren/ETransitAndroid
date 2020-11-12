@@ -1,6 +1,6 @@
 package com.example.etransportandroid.data
 
-data class Order(
+data class CommercialOrder(
     var itemDescription: String = "",
     var weight: String = "",
     var PickUpDate: String = "",
