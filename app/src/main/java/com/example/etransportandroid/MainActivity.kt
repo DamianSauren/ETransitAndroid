@@ -41,23 +41,23 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
 
 
-        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), CommercialOrder(
-            itemDescription = "test",
-            weight = "pittig zwaar",
-            PickUpDate = "",
-            hazards = "",
-            timeFrame = 5,
-            bookingDate = "",
-            dimensions = CommercialOrder.Dimensions (
-                height = "",
-                length = "",
-                depth = ""
-            ),
-            locations = CommercialOrder.Locations(
-                to = "",
-                from = ""
-            )
-        ))
+//        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), CommercialOrder(
+//            itemDescription = "test",
+//            weight = "pittig zwaar",
+//            PickUpDate = "",
+//            hazards = "",
+//            timeFrame = 5,
+//            bookingDate = "",
+//            dimensions = CommercialOrder.Dimensions (
+//                height = "",
+//                length = "",
+//                depth = ""
+//            ),
+//            locations = CommercialOrder.Locations(
+//                to = "",
+//                from = ""
+//            )
+//        ))
         
         setupMenuButtons()
     }
