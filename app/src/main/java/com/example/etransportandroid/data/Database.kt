@@ -1,5 +1,6 @@
 package com.example.etransportandroid.data
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,10 +22,10 @@ class Database {
     fun writeNewUser(userId: String, groupId: GroupID) {
         val group = when(groupId){
             GroupID.COMMERCIAL -> {
-                "Commercial"
+                commercial
             }
             GroupID.PRIVATE -> {
-                "Private"
+                private
             }
         }
 
@@ -36,32 +37,6 @@ class Database {
             )
         )
         database.reference.child("users").child(userId).setValue(user)
-    }
-
-    fun getUserGroupID(userId: String): GroupID {
-        var isDone = false
-        val dbRef = database.reference
-        var group: GroupID = GroupID.PRIVATE
-
-        val postListener = object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(!isDone) {
-                    val groupId = snapshot.child("users").child(userId).child("groupID").value.toString()
-
-                    if(groupId == commercial) {
-                        group = GroupID.COMMERCIAL
-                    } else if (groupId == private) {
-                        group = GroupID.PRIVATE
-                    }
-
-                    isDone = true
-                }
-            }
-            override fun onCancelled(error: DatabaseError) { }
-        }
-        dbRef.addValueEventListener(postListener)
-
-        return group
     }
 
     fun writeNewOrder(userId: String, order: CommercialOrder) {
