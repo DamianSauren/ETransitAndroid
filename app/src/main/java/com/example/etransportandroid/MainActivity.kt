@@ -1,12 +1,11 @@
 package com.example.etransportandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.etransportandroid.data.Database
-import com.example.etransportandroid.data.CommercialOrder
 import com.example.etransportandroid.fragments.CommercialBookingFragment
 import com.example.etransportandroid.fragments.HomeFragment
 import com.example.etransportandroid.fragments.PrivateBookingFragment
@@ -88,5 +87,10 @@ class MainActivity : AppCompatActivity() {
         tr.replace(R.id.container, fragment)
         tr.commit()
         currentFragment = fragment
+    }
+
+    fun loadStartActivity() {
+        val intent = Intent(this, StartActivity::class.java)
+        startActivity(intent)
     }
 }
