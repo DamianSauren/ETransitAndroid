@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFragmentToActivity(fragment: Fragment){
+    fun addFragmentToActivity(fragment: Fragment){
         val fm = supportFragmentManager
         val tr = fm.beginTransaction()
         tr.replace(R.id.container, fragment)
