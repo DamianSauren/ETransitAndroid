@@ -42,25 +42,6 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
 
         Log.d("MainActivity", "User id is ${mAuth.currentUser?.uid}")
-
-
-//        Database().writeNewOrder(mAuth.currentUser?.uid.toString(), CommercialOrder(
-//            itemDescription = "test",
-//            weight = "pittig zwaar",
-//            PickUpDate = "",
-//            hazards = "",
-//            timeFrame = 5,
-//            bookingDate = "",
-//            dimensions = CommercialOrder.Dimensions (
-//                height = "",
-//                length = "",
-//                depth = ""
-//            ),
-//            locations = CommercialOrder.Locations(
-//                to = "",
-//                from = ""
-//            )
-//        ))
         
         setupMenuButtons()
     }
@@ -101,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFragmentToActivity(fragment: Fragment){
+    fun addFragmentToActivity(fragment: Fragment){
         val fm = supportFragmentManager
         val tr = fm.beginTransaction()
         tr.replace(R.id.container, fragment)
